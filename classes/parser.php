@@ -6,7 +6,6 @@
     public function __construct()
     {
       //
-      // $this->whitelist = ['.bg-primary'];
     }
 
     protected function isAllowedRule($rule)
@@ -23,15 +22,15 @@
 
     function stripUnusedCss($style)
     {
+      $oCssParser = new Sabberworm\CSS\Parser($style);
+      $parser = $oCssParser->parse();
+
       // If whitelist is empty then exit as there's nothing to strip out
       if (!is_array($this->whitelist))
       {
-        return $style;
+        return $parser->render();
       }
 
-      $oCssParser = new Sabberworm\CSS\Parser($style);
-      $parser = $oCssParser->parse();
-      
       foreach($parser->getAllDeclarationBlocks() as $block)
       {
         foreach($block->getSelectors() as $selector)
@@ -68,7 +67,6 @@
           }
         }
       }
-
       $this->whitelist = array_unique($attrData);
     }
   }

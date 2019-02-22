@@ -5,6 +5,8 @@
 
   class Tailwind
   {
+    private $cssfile = 'css/tailwind.css';
+
     // constructor
     public function __construct($config)
     {
@@ -30,7 +32,7 @@
     public $compressed = "Leafo\ScssPhp\Formatter\Compressed"; // Single line, no white-space
     public $crunched = "Leafo\ScssPhp\Formatter\Crunched"; // Single line, no white-space, no comments
 
-    public function compile()
+    public function buildSiteCss()
     {
       $str = '';
 
@@ -41,7 +43,14 @@
         }
       }
 
-      return $this->scss->compile($str);
+      $this->saveToFile($this->scss->compile($str));
+    }
+
+    public function getFile()
+    {
+      if (file_exists($this->cssfile)) {
+        return file_get_contents($this->cssfile);
+      }
     }
 
     public function compress($style)
@@ -60,15 +69,18 @@
       $this->formatter = $format;
     }
 
+    private function saveToFile($style)
+    {
+      $fp = fopen($this->cssfile, 'w');
+      fwrite($fp, $style);
+      fclose($fp);
+    }
+
     private function getPlugins() {
       $str = '';
       foreach ($this->plugins as $plugin)
       {
         $str .= $plugin->compile();
       }
-    }
-
-    private function applyFormat() {
-
     }
   }
