@@ -8,6 +8,7 @@
     // constructor
     public function __construct($config)
     {
+      $this->scss = new Compiler();
       $this->config = $config;
       $this->registerPlugins();
     }
@@ -31,12 +32,6 @@
 
     public function compile()
     {
-      $scss = new Compiler();
-      if (isset($this->formatter))
-      {
-        $scss->setFormatter($this->formatter);
-      }
-
       $str = '';
 
       if (isset($this->plugins)) {
@@ -46,7 +41,18 @@
         }
       }
 
-      return $scss->compile($str);
+      return $this->scss->compile($str);
+    }
+
+    public function compress($style)
+    {
+      if (isset($this->formatter))
+      {
+        $this->scss->setFormatter($this->formatter);
+        return $this->scss->compile($style);
+      }
+
+      return $style;
     }
 
     public function setFormat($format)
