@@ -10,6 +10,7 @@
   .m-1 {
     margin: .25rem;
   }
+
   .p-1 {
     padding: .25rem;
   }
@@ -26,6 +27,7 @@
   .justify-between {
     justify-content: space-between;
   }
+
   .w-full {
     width: 100%;
   }
