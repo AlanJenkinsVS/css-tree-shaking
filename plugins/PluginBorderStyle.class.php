@@ -1,31 +1,16 @@
 <?php
-  require_once('IPlugin.php');
+  require_once('Plugin.php');
 
-  class PluginBorderStyle implements IPlugin
+  class PluginBorderStyle extends Plugin
   {
-    private $prop = 'borderStyle';
-
-    public function __construct($config)
-    {
-      if($this->isValid($config))
-      {
-        $this->borderStyle = $config[$this->prop];
-      }
-    }
-
-    private function isValid($config)
-    {
-      return isset($config[$this->prop]);
-    }
+    protected $prop = 'borderStyle';
 
     public function compile()
     {
-      $str= '';
-      foreach ($this->borderStyle as $key => $value) {
-        $str .= '
-.border-'.$key.' { border-style: '.$value.'; }';
-      }
+      $this->generators = [
+'.border-$key { border-style: $value; }',
+      ];
 
-      return $str;
+      return $this->runGenerators();
     }
   }

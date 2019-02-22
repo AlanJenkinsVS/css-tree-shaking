@@ -1,40 +1,22 @@
 <?php
-  require_once('IPlugin.php');
+  require_once('Plugin.php');
 
-  class PluginBorderColours implements IPlugin
+  class PluginBorderColours extends Plugin
   {
-    private $prop = 'colours';
+    protected $prop = 'colours';
 
-    public function __construct($config)
+    public function compile()
     {
-      if ($this->isValid($config)) {
-        $this->colours = $config[$this->prop];
-      }
-    }
+      $this->generators = [
+'.border-$key-lightest { border-color: lighten($value, 30%); }',
+'.border-$key-lighter { border-color: lighten($value, 20%); }',
+'.border-$key-light { border-color: lighten($value, 10%); }',
+'.border-$key { border-color: $value; }',
+'.border-$key-dark { border-color: darken($value, 10%); }',
+'.border-$key-darker { border-color: darken($value, 20%); }',
+'.border-$key-darkest { border-color: darken($value, 30%); }'
+      ];
 
-    private function isValid($config)
-    {
-      return isset($config[$this->prop]);
-    }
-
-    function compile()
-    {
-      $str= '';
-      if (isset($this->colours)) {
-        foreach ($this->colours as $key => $value) {
-          // set lighten/darken settings in config setting outside of this class.
-          $str .= '
-$color: '.$value.';
-.border-'.$key.'-lightest { border-color: lighten($color, 30%) };
-.border-'.$key.'-lighter { border-color: lighten($color, 20%) };
-.border-'.$key.'-light { border-color: lighten($color, 10%) };
-.border-'.$key.' { border-color: $color };
-.border-'.$key.'-dark { border-color: darken($color, 10%) };
-.border-'.$key.'-darker { border-color: darken($color, 20%) };
-.border-'.$key.'-darkest { border-color: darken($color, 30%) };';
-        }
-      }
-
-      return $str;
+      return $this->runGenerators();
     }
   }

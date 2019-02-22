@@ -1,42 +1,22 @@
 <?php
-  require_once('IPlugin.php');
+  require_once('Plugin.php');
 
-  class PluginBackgroundColours implements IPlugin
+  class PluginBackgroundColours extends Plugin
   {
-    private $prop = 'colours';
+    protected $prop = 'colours';
 
-    public function __construct($config)
+    public function compile()
     {
-      if($this->isValid($config)) {
-        $this->colours = $config[$this->prop];
-      }
-    }
+      $this->generators = [
+'.bg-$key-lightest { background-color: lighten($value, 30%); }',
+'.bg-$key-lighter { background-color: lighten($value, 20%); }',
+'.bg-$key-light { background-color: lighten($value, 10%); }',
+'.bg-$key { background-color: $value; }',
+'.bg-$key-dark { background-color: darken($value, 10%); }',
+'.bg-$key-darker { background-color: darken($value, 20%); }',
+'.bg-$key-darkest { background-color: darken($value, 30%); }'
+      ];
 
-    private function isValid($config)
-    {
-      return isset($config[$this->prop]);
-    }
-
-    function compile()
-    {
-      $str= '';
-
-      if (isset($this->colours)) {
-        foreach ($this->colours as $key => $value) {
-          // set lighten/darken settings in config setting outside of this class.
-          $str .= '
-$color: '.$value.';
-.bg-'.$key.'-lightest { background-color: lighten($color, 30%) };
-.bg-'.$key.'-lighter { background-color: lighten($color, 20%) };
-.bg-'.$key.'-light { background-color: lighten($color, 10%) };
-.bg-'.$key.' { background-color: $color };
-.bg-'.$key.'-dark { background-color: darken($color, 10%) };
-.bg-'.$key.'-darker { background-color: darken($color, 20%) };
-.bg-'.$key.'-darkest { background-color: darken($color, 30%) };';
-        }
-      }
-
-      return $str;
-      
+      return $this->runGenerators();
     }
   }

@@ -7,9 +7,9 @@
   <style>
   <%=tailwind%>
 
-  .m-1 {
+  /* .m-1 {
     margin: .25rem;
-  }
+  } */
 
   .p-1 {
     padding: .25rem;
