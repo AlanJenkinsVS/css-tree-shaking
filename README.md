@@ -3,7 +3,7 @@ Demo setup to explore how we might leverage a Tailwind-like utility framework du
 
 This is just a proof of concept.
 
-# Objective
+## Objective
 Use a utility CSS framework like Tailwind in a multi-server environment where we need to be able to:
 
 * Customise branding colours per site
@@ -11,7 +11,13 @@ Use a utility CSS framework like Tailwind in a multi-server environment where we
 * ...
 
 
-# Setup
+## Setup
 Uses PHP's built-in web server. In root directory just run:
 
 `php -S localhost:8080`
+
+## Dependencies
+Makes use of the following dependencies loaded via Composer
+
+* [https://github.com/leafo/scssphp](https://github.com/leafo/scssphp)
+* [https://github.com/sabberworm/PHP-CSS-Parser/](https://github.com/sabberworm/PHP-CSS-Parser/)
