@@ -25,8 +25,7 @@
         foreach ($this->colours as $key => $value) {
           // set lighten/darken settings in config setting outside of this class.
           $str .= '
-            .appearance-'.$key.' { appearance: '.$value.'; }
-          ';
+.appearance-'.$key.' { appearance: '.$value.'; }';
         }
       }
 

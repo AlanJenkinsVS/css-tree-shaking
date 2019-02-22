@@ -23,8 +23,7 @@
       $str= '';
       foreach ($this->borderStyle as $key => $value) {
         $str .= '
-          .border-'.$key.' { border-style: '.$value.'; }
-        ';
+.border-'.$key.' { border-style: '.$value.'; }';
       }
 
       return $str;

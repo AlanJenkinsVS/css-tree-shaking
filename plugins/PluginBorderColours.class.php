@@ -24,15 +24,14 @@
         foreach ($this->colours as $key => $value) {
           // set lighten/darken settings in config setting outside of this class.
           $str .= '
-            $color: '.$value.';
-            .border-'.$key.'-lightest { border-color: lighten($color, 30%) };
-            .border-'.$key.'-lighter { border-color: lighten($color, 20%) };
-            .border-'.$key.'-light { border-color: lighten($color, 10%) };
-            .border-'.$key.' { border-color: $color };
-            .border-'.$key.'-dark { border-color: darken($color, 10%) };
-            .border-'.$key.'-darker { border-color: darken($color, 20%) };
-            .border-'.$key.'-darkest { border-color: darken($color, 30%) };
-          ';
+$color: '.$value.';
+.border-'.$key.'-lightest { border-color: lighten($color, 30%) };
+.border-'.$key.'-lighter { border-color: lighten($color, 20%) };
+.border-'.$key.'-light { border-color: lighten($color, 10%) };
+.border-'.$key.' { border-color: $color };
+.border-'.$key.'-dark { border-color: darken($color, 10%) };
+.border-'.$key.'-darker { border-color: darken($color, 20%) };
+.border-'.$key.'-darkest { border-color: darken($color, 30%) };';
         }
       }
 
