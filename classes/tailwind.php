@@ -34,6 +34,12 @@
 
     public function buildSiteCss()
     {
+      // @todo - Temp code. Just fakes a css site rebuild when you pass a rebuild url param
+      // Real world this would only occur when brand settings are updated
+      if (!isset($_GET['rebuild']) && $this->cssFileExists()) {
+        return;
+      }
+
       $str = '';
 
       if (isset($this->plugins)) {
@@ -46,11 +52,15 @@
       $this->saveToFile($this->scss->compile($str));
     }
 
+    public function cssFileExists()
+    {
+      return file_exists($this->cssfile);
+    }
+
     public function getFile()
     {
-      if (file_exists($this->cssfile)) {
-        return file_get_contents($this->cssfile);
-      }
+      if (!$this->cssFileExists()) return;
+      return file_get_contents($this->cssfile);
     }
 
     public function compress($style)

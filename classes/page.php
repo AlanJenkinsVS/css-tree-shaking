@@ -28,7 +28,7 @@ class Page {
     // Check if the cached file is still fresh. If it is, serve it up and exit.
     if (file_exists($this->cachefile) && time() - $this->cachetime < filemtime($this->cachefile)) {
       include($this->cachefile);
-      exit;
+      return;
     }
 
     // This would actually occur only after CSS changes are made in config/database

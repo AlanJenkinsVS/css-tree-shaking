@@ -73,5 +73,12 @@
   <div class="m-1 p-1 border border-primary-dark">Dark</div>
   <div class="m-1 p-1 border border-primary-darker">Darker</div>
   <div class="m-1 p-1 border border-primary-darkest">Darkest</div>
+
+  <p>
+    Load:
+    <a href="/">Cached Page</a> | 
+    <a href="?cache=disabled">Cache Disabled</a> | 
+    <a href="?cache=disabled&amp;rebuild">CSS Rebuild</a>
+  </p>
 </body>
 </html>
