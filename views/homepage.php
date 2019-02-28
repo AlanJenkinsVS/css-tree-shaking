@@ -4,34 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Homepage</title>
-  <style>
-  <%=tailwind%>
-
-  /* .m-1 {
-    margin: .25rem;
-  } */
-
-  .p-1 {
-    padding: .25rem;
-  }
-
-  .flex {
-    display: flex;
-  }
-
-  .border {
-    border-width: 1px;
-    border-style: solid;
-  }
-
-  .justify-between {
-    justify-content: space-between;
-  }
-
-  .w-full {
-    width: 100%;
-  }
-  </style>
+  <style><%=tailwind%>.p-1 {padding: .25rem;}.flex {display: flex;}.border {border-width: 1px;border-style: solid;}.justify-between {justify-content: space-between;}.w-full {width: 100%;}</style>
 </head>
 <body>
 <div class="flex justify-between">
